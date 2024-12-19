@@ -1,15 +1,34 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Random random = new Random();
+        Shape[] shapes = new Shape[10];
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        // Populate the array with random shapes
+        for (int i = 0; i < shapes.length; i++) {
+            int shapeType = random.nextInt(3);
+            switch (shapeType) {
+                case 0: // Sphere
+                    double radius = 1 + random.nextDouble() * 9; // Radius between 1 and 10
+                    shapes[i] = new Sphere(radius);
+                    break;
+                case 1: // Cylinder
+                    double cylRadius = 1 + random.nextDouble() * 9; // Radius between 1 and 10
+                    double height = 5 + random.nextDouble() * 15; // Height between 5 and 20
+                    shapes[i] = new Cylinder(cylRadius, height);
+                    break;
+                case 2: // Cube
+                    double side = 1 + random.nextDouble() * 9; // Side length between 1 and 10
+                    shapes[i] = new Cube(side);
+                    break;
+            }
+        }
+
+        for (Shape shape : shapes) {
+            System.out.println(shape);
+            System.out.printf("Surface Area: %.2f\n", shape.surfaceArea());
+            System.out.printf("Volume: %.2f\n\n", shape.volume());
         }
     }
 }
